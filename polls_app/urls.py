@@ -15,15 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< HEAD
 from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name = 'index.html'))
-=======
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
->>>>>>> b26554a3792eb089e7a7da74a6809cfaea929e98
 ]
