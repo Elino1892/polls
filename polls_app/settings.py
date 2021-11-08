@@ -10,10 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
+<<<<<<< HEAD
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
+=======
+import os
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+>>>>>>> b26554a3792eb089e7a7da74a6809cfaea929e98
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,9 +62,13 @@ ROOT_URLCONF = 'polls_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [
             BASE_DIR / 'frontend/build'
         ],
+=======
+        'DIRS': [],
+>>>>>>> b26554a3792eb089e7a7da74a6809cfaea929e98
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,7 +136,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 
 STATICFILES_DIRS = [
     BASE_DIR / 'frontend/build/static'
 ]
+=======
+>>>>>>> b26554a3792eb089e7a7da74a6809cfaea929e98
