@@ -1,0 +1,33 @@
+footer {
+	width: 100%;
+	background-color: #00bf6f;
+	margin-top: auto;
+}
+.footer-container {
+	margin-top: 22.5px;
+	padding: 20px;
+}
+.logo-weii {
+	width: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-around;
+	img {
+		max-width: 200px;
+	}
+}
+.authors-container {
+	color: #fff;
+	width: fit-content;
+	margin: auto;
+	margin-bottom: 10px;
+	ul {
+		list-style-type: none;
+		li {
+			line-height: 1.5;
+		}
+	}
+	h3 {
+		margin: 10px 0;
+	}
+}
