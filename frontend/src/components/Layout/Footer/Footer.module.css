@@ -1,0 +1,70 @@
+footer {
+	 width: 100%;
+	 background-color: #00bf6f;
+	 margin-top: auto;
+}
+ .footer-container {
+	 margin-top: 22.5px;
+	 padding: 20px;
+}
+ .logo-weii {
+	 width: 100%;
+	 margin: auto;
+	 display: flex;
+	 justify-content: space-around;
+}
+ .logo-weii img {
+	 max-width: 200px;
+}
+ .authors-container {
+	 color: #fff;
+	 width: fit-content;
+	 margin: auto;
+	 margin-bottom: 10px;
+}
+ .authors-container ul {
+	 list-style-type: none;
+}
+ .authors-container ul li {
+	 line-height: 1.5;
+}
+ .authors-container h3 {
+	 margin: 10px 0;
+}
+ 
+
+
+@media all and (min-width: 500px) {
+
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo-weii {
+        flex: 1;
+        display: block;
+    }
+
+}
+
+
+@media all and (min-width: 960px) {
+    .footer-container {
+        width: 80%;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .logo-weii img {
+        max-width: 250px;
+    }
+
+    .form-content h2 {
+        font-size: 23px;
+    }
+
+    .form-content input, .form-content button {
+        font-size: 16px;
+    }
+}

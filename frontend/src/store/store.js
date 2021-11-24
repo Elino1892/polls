@@ -1,11 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/user-reducer';
 
-import { configureStore } from "@reduxjs/toolkit";
-import logger from 'redux-logger'
-import userLoginSlice from "./slices/user-slice";
+import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/user-reducer';
+import { pollListReducer } from './reducers/poll-reducer';
+
+
+// import { configureStore } from "@reduxjs/toolkit";
+// import logger from 'redux-logger'
+// import userLoginSlice from "./slices/user-slice";
 // import pollsSlice from "./slices/polls-slice";
 
 const reducer = combineReducers({
@@ -13,6 +16,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+
+  pollList: pollListReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
@@ -41,10 +46,6 @@ const store = createStore(reducer, initialState,
 //   preloadedState,
 //   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 // });
-
-
-
-
 
 
 export default store;

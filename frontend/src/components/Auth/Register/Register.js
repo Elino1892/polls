@@ -6,8 +6,9 @@ import { register } from '../../../store/actions/user-actions';
 import Input from '../../UI/Input'
 import Button from '../../UI/Button'
 import Layout from '../../Layout/Layout/Layout';
+import LoadingSpinner from '../../UI/LoadingSpinner';
 
-import './Register.scss'
+import classes from './Register.module.css'
 
 const Register = () => {
 
@@ -52,67 +53,72 @@ const Register = () => {
 
   return (
     <Layout>
-      <div className="page-container-login">
-        <div className="form">
-          <div className="form-content">
-            <h2>Rejestracja</h2>
-            <form onSubmit={submitHandler}>
-              <Input
+      <div className={classes['page-container-login']}>
+        <div className={classes.form}>
+          <div className={classes['form-content']}>
+            {loading ? <LoadingSpinner />
+              : error ? <h2>Błąd: {error}</h2>
+                :
+                <>
+                  <h2>Rejestracja</h2>
+                  <form onSubmit={submitHandler}>
+                    <Input
 
-                ref={nameInputRef}
-                // label={'Email'}
-                input={{
-                  id: 'name',
-                  type: 'text',
-                  placeholder: 'Podaj imie',
+                      ref={nameInputRef}
+                      // label={'Email'}
+                      input={{
+                        id: 'name',
+                        type: 'text',
+                        placeholder: 'Podaj imie',
 
-                }}
-              />
-              <Input
-                ref={emailInputRef}
-                // label={'Email'}
-                input={{
-                  id: 'email',
-                  type: 'email',
-                  placeholder: 'Podaj email',
+                      }}
+                    />
+                    <Input
+                      ref={emailInputRef}
+                      // label={'Email'}
+                      input={{
+                        id: 'email',
+                        type: 'email',
+                        placeholder: 'Podaj email',
 
-                }}
-              />
-              <Input
-                ref={passwordInputRef}
-                // label={'Hasło'}
-                input={{
-                  id: 'password',
-                  type: 'password',
-                  placeholder: 'Podaj hasło',
+                      }}
+                    />
+                    <Input
+                      ref={passwordInputRef}
+                      // label={'Hasło'}
+                      input={{
+                        id: 'password',
+                        type: 'password',
+                        placeholder: 'Podaj hasło',
 
-                }}
+                      }}
 
-              />
-              <Input
-                ref={confirmPasswordInputRef}
-                // label={'Hasło'}
-                input={{
-                  id: 'password2',
-                  type: 'password',
-                  placeholder: 'Powtórz hasło',
+                    />
+                    <Input
+                      ref={confirmPasswordInputRef}
+                      // label={'Hasło'}
+                      input={{
+                        id: 'password2',
+                        type: 'password',
+                        placeholder: 'Powtórz hasło',
 
-                }}
+                      }}
 
-              />
-              <Button
-                type={'submit'}
-                disabled={false}
-              >
-                Zarejestruj się
-              </Button>
-            </form>
-
+                    />
+                    <Button
+                      type={'submit'}
+                      disabled={false}
+                    >
+                      Zarejestruj się
+                    </Button>
+                  </form>
+                </>
+            }
           </div>
-          {message && <p className="error">{message}</p>}
-          <div className="info">
+          {message && <p className={classes.error}>{message}</p>}
+          <div className={classes.info}>
             <p>Masz już konto ?</p>
-            <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Zaloguj się!</Link>
+            <Link className={classes.info} to={redirect ? `/login?redirect=${redirect}` : '/login'}>Zaloguj się!</Link>
           </div>
 
         </div>

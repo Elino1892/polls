@@ -7,15 +7,13 @@ import { USER_UPDATE_PROFILE_RESET } from '../../../constants/userConstants';
 import Input from '../../UI/Input'
 import Button from '../../UI/Button'
 import Layout from '../../Layout/Layout/Layout';
+import LoadingSpinner from '../../UI/LoadingSpinner';
 
-import './Profile.scss'
+import classes from './Profile.module.css'
 
 const Profile = () => {
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -70,65 +68,70 @@ const Profile = () => {
 
   return (
     <Layout>
-      <div className="page-container-login">
-        <div className="form">
-          <div className="form-content">
-            <h2>Twoje konto</h2>
-            <form onSubmit={submitHandler}>
-              <Input
-                input={{
-                  id: 'name',
-                  type: 'text',
-                  placeholder: 'Podaj imie',
-                  value: name,
-                  onChange: (e) => setName(e.target.value)
-                }}
-              />
-              <Input
+      <div className={classes['page-container-login']}>
+        <div className={classes.form}>
+          <div className={classes['form-content']}>
+            {loading ? <LoadingSpinner />
+              : error ? <h2>Błąd: {error}</h2>
+                :
+                <>
+                  <h2>Twoje konto</h2>
+                  <form onSubmit={submitHandler}>
+                    <Input
+                      input={{
+                        id: 'name',
+                        type: 'text',
+                        placeholder: 'Podaj imie',
+                        value: name,
+                        onChange: (e) => setName(e.target.value)
+                      }}
+                    />
+                    <Input
 
-                // label={'Email'}
-                input={{
-                  id: 'email',
-                  type: 'email',
-                  placeholder: 'Podaj email',
-                  value: email,
-                  onChange: (e) => setEmail(e.target.value)
-                }}
-              />
-              <Input
+                      // label={'Email'}
+                      input={{
+                        id: 'email',
+                        type: 'email',
+                        placeholder: 'Podaj email',
+                        value: email,
+                        onChange: (e) => setEmail(e.target.value)
+                      }}
+                    />
+                    <Input
 
-                // label={'Hasło'}
-                input={{
-                  id: 'password',
-                  type: 'password',
-                  placeholder: 'Podaj hasło',
-                  value: password,
-                  onChange: (e) => setPassword(e.target.value)
-                }}
+                      // label={'Hasło'}
+                      input={{
+                        id: 'password',
+                        type: 'password',
+                        placeholder: 'Podaj hasło',
+                        value: password,
+                        onChange: (e) => setPassword(e.target.value)
+                      }}
 
-              />
-              <Input
+                    />
+                    <Input
 
-                // label={'Hasło'}
-                input={{
-                  id: 'password2',
-                  type: 'password',
-                  placeholder: 'Powtórz hasło',
-                  value: confirmPassword,
-                  onChange: (e) => setConfirmPassword(e.target.value)
-                }}
+                      // label={'Hasło'}
+                      input={{
+                        id: 'password2',
+                        type: 'password',
+                        placeholder: 'Powtórz hasło',
+                        value: confirmPassword,
+                        onChange: (e) => setConfirmPassword(e.target.value)
+                      }}
 
-              />
-              <Button
-                type={'submit'}
-                disabled={false}
-              >
-                Zaktualizuj
-              </Button>
-            </form>
-
+                    />
+                    <Button
+                      type={'submit'}
+                      disabled={false}
+                    >
+                      Zaktualizuj
+                    </Button>
+                  </form>
+                </>
+            }
           </div>
-          {message && <p className="error">{message}</p>}
+          {message && <p className={classes.error}>{message}</p>}
 
 
         </div>

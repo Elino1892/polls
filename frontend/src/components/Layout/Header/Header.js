@@ -1,10 +1,10 @@
-import './Header.scss'
+import classes from './Header.module.css'
 
 const Header = () => {
   return (
     <header>
-      <div className="header-container">
-        <div className="header-content">
+      <div className={classes["header-container"]}>
+        <div className={classes["header-content"]}>
           <h1>Tworzenie własnych ankiet z możliwością generowania raportów</h1>
         </div>
       </div>

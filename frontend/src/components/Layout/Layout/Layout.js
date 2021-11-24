@@ -1,10 +1,10 @@
 import Footer from "../Footer/Footer";
 import Nav from "../Nav/Nav";
-import './Layout.scss'
+import classes from './Layout.module.css'
 
 const Layout = ({ children }) => {
   return (
-    <div className="page">
+    <div className={classes.page}>
       <Nav />
       {children}
       <Footer />

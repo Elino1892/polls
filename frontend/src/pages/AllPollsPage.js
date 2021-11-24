@@ -1,41 +1,29 @@
 // localhost:3000/polls
-
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import PollList from "../components/Polls/PollList";
+import { useDispatch, useSelector } from 'react-redux';
+import { listPolls } from "../store/actions/poll-actions";
+import LoadingSpinner from '../components/UI/LoadingSpinner'
 
 const AllPollsPage = () => {
 
-  const [loadedPolls, setLoadedPolls] = useState([]);
+  const dispatch = useDispatch();
+
+  const pollList = useSelector(state => state.pollList)
+  const { error, loading, polls } = pollList;
 
   useEffect(() => {
-    const fetchPolls = async () => {
-      const respone = await fetch('/api/polls/');
-      if (!respone.ok) {
-        throw new Error('Coś poszło nie tak!');
-      }
 
-      const responeData = await respone.json();
+    dispatch(listPolls());
 
-      const polls = []
-
-      for (const key in responeData) {
-        polls.push({
-          id: key,
-          name: responeData[key].poll_name,
-          description: responeData[key].poll_description,
-          deadline: responeData[key].deadline,
-        });
-      }
-
-      setLoadedPolls(polls);
-
-    }
-    fetchPolls();
-  }, [])
+  }, [dispatch])
 
   return <section>
     <h1>Ankiety:</h1>
-    <PollList polls={loadedPolls} />
+    {loading ? <LoadingSpinner />
+      : error ? <h2>Błąd: {error}</h2>
+        : <PollList polls={polls} />
+    }
   </section>
 }
 

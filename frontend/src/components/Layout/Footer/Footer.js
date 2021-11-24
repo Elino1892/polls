@@ -1,15 +1,15 @@
-import './Footer.scss'
+import classes from './Footer.module.css'
 
 const Footer = () => {
   return (
     <footer>
-      <div className="footer-container">
-        <div className="logo-weii">
+      <div className={classes["footer-container"]}>
+        <div className={classes["logo-weii"]}>
           <img src="../../../images/logo-weii.png" alt="logo-weii" />
         </div>
-        <div className="authors-container">
+        <div className={classes["authors-container"]}>
           <h3>Autorzy:</h3>
-          <ul className="authors">
+          <ul className={classes.authors}>
             <li>Kondzierski Przemysław</li>
             <li>Kopczacki Kacper</li>
             <li>Marciniak Marcin</li>
