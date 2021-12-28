@@ -6,9 +6,11 @@ from rest_framework import status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from main.serializers import UserSerializer, UserSerializerWithToken
+from main.serializers import GroupSerializer, UserGroupSerializer, UserSerializer, UserSerializerWithToken
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import  User
+
+from main.models import UserGroup, GroupOfUsers
 
 from django.contrib.auth.hashers import make_password
 
@@ -54,6 +56,14 @@ def registerUser(request):
         email = data['email'],
         password = make_password(data['password'])
       )
+
+      group_everybody = GroupOfUsers.objects.get(group_name = 'Wszyscy')
+
+      UserGroup.objects.create(
+        user = user,
+        group = group_everybody
+      )
+
       serializer = UserSerializerWithToken(user, many=False)
       return Response(serializer.data)
   except:                                             # DODAĆ KOLEJNE WALIDACJE!
@@ -92,5 +102,122 @@ def getUserProfile(request):
 @permission_classes([IsAdminUser])
 def getUsers(request):
   users = User.objects.all()
-  serializer = UserSerializer(users, many = True)
-  return Response(serializer.data)
+  user_serializer = UserSerializer(users, many = True)
+  all_users_groups = []
+
+  for user in user_serializer.data:
+
+    user_groups = {
+      'user': user,
+      'groups': [],
+    }
+
+    # print(data['id'])
+    user_group = UserGroup.objects.filter(user = user['id'])
+    user_group_serializer = UserGroupSerializer(user_group, many=True)
+    # print(user_group_serializer.data)
+
+    for user_group in user_group_serializer.data:
+          # print(user_group)
+          group = GroupOfUsers.objects.filter(ID = user_group['group'])
+          group_serializer = GroupSerializer(group, many=True)
+          user_groups['groups'].append(group_serializer.data[0])
+          # print(group_serializer.data)
+    all_users_groups.append(user_groups)
+    # group = GroupOfUsers.objects.filter(ID = user_group_serializer.data.group)
+  # print(all_users_groups)
+  return Response(all_users_groups)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+    user_serializer = UserSerializer(user, many=False)
+
+    user_group_object = {
+      'userInfo': user_serializer.data,
+      'groups': [],
+    }
+
+    # print(user_serializer.data)
+
+    user_group_instance = UserGroup.objects.filter(user = user_serializer.data['id'])
+    user_group_serializer = UserGroupSerializer(user_group_instance, many=True)
+
+    
+    for user_group in user_group_serializer.data:
+          # print(user_group)
+          group = GroupOfUsers.objects.get(ID = user_group['group'])
+          group_serializer = GroupSerializer(group, many=False)
+          # print(group_serializer.data)
+          user_group_object['groups'].append(group_serializer.data)
+    
+    # print(user_group_object)
+
+
+    return Response(user_group_object)
+
+
+@api_view(['PUT', 'DELETE', 'POST'])
+@permission_classes([IsAuthenticated])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+
+    data = request.data
+
+    print(data)
+
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['isAdmin']
+
+    user.save()
+
+    user_groups = UserGroup.objects.filter(user = user.id)
+    user_groups_serializer = UserGroupSerializer(user_groups, many = True)
+
+    everybody_group = GroupOfUsers.objects.get(group_name = 'Wszyscy')
+    everybody_group_serializer = GroupSerializer(everybody_group, many=False)
+    id_everybody_group = everybody_group_serializer.data['ID']
+
+    print('\n')
+    print(user_groups_serializer.data)
+
+    for user_group in user_groups_serializer.data:
+        if(user_group['group'] != id_everybody_group):
+          for group in data['userGroups']:
+            if(group['ID'] == user_group['group']):
+              if(not group['isBelong']):
+                  user_group_delete = UserGroup.objects.get(user = user.id, group = group['ID'])
+                  user_group_delete.delete()
+            else:
+              if(group['isBelong']):
+                # print('WSZEDŁEM')
+                groupInstance = GroupOfUsers.objects.get(ID = group['ID'])
+                UserGroup.objects.create(
+                  user = user,
+                  group = groupInstance
+                )
+    if(len(user_groups) == 1 and user_groups_serializer.data[0]['group'] ==  id_everybody_group):
+      for group in data['userGroups']:
+        if(group['isBelong'] and group['ID'] != id_everybody_group):
+          print('WSZEDŁEM')
+          groupInstance = GroupOfUsers.objects.get(ID = group['ID'])
+          UserGroup.objects.create(
+              user = user,
+              group = groupInstance
+          )
+    
+
+    serializer = UserSerializer(user, many=False)
+
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteUser(request, pk):
+    userForDeletion = User.objects.get(id=pk)
+    userForDeletion.delete()
+    return Response('User was deleted')

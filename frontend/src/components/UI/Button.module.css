@@ -1,0 +1,29 @@
+.button {
+	 display: block;
+	 padding: 10px 15px;
+	 background-color: #f9be01;
+	 border-radius: 5px;
+	 font-weight: bold;
+	 cursor: pointer;
+	 border: none;
+}
+ .button:hover {
+	 background-color: #ccc;
+}
+
+
+@media all and (min-width: 600px) {
+	 .button a {
+		 background: #f9be01;
+		 border-radius: 5px;
+	}
+	 .button a:hover {
+		 text-decoration: none;
+		 background: #ccc;
+	}
+}
+ @media all and (min-width: 960px) {
+	 .button {
+		 order: 2;
+	}
+}

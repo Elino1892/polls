@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getUserDetails, updateUserProfile } from '../../../store/actions/user-actions';
 import { USER_UPDATE_PROFILE_RESET } from '../../../constants/userConstants';
 
@@ -67,76 +67,75 @@ const Profile = () => {
   }
 
   return (
-    <Layout>
-      <div className={classes['page-container-login']}>
-        <div className={classes.form}>
-          <div className={classes['form-content']}>
-            {loading ? <LoadingSpinner />
-              : error ? <h2>Błąd: {error}</h2>
-                :
-                <>
-                  <h2>Twoje konto</h2>
-                  <form onSubmit={submitHandler}>
-                    <Input
-                      input={{
-                        id: 'name',
-                        type: 'text',
-                        placeholder: 'Podaj imie',
-                        value: name,
-                        onChange: (e) => setName(e.target.value)
-                      }}
-                    />
-                    <Input
+    <div className={classes['page-container-login']}>
+      <div className={classes.form}>
+        <div className={classes['form-content']}>
+          {loading ? <LoadingSpinner />
+            : error ? <h2>Błąd: {error}</h2>
+              :
+              <>
+                <h2>Twoje konto</h2>
+                <form onSubmit={submitHandler}>
+                  <Input
+                    input={{
+                      id: 'name',
+                      type: 'text',
+                      placeholder: 'Podaj imie',
+                      value: name,
+                      onChange: (e) => setName(e.target.value)
+                    }}
+                  />
+                  <Input
 
-                      // label={'Email'}
-                      input={{
-                        id: 'email',
-                        type: 'email',
-                        placeholder: 'Podaj email',
-                        value: email,
-                        onChange: (e) => setEmail(e.target.value)
-                      }}
-                    />
-                    <Input
+                    // label={'Email'}
+                    input={{
+                      id: 'email',
+                      type: 'email',
+                      placeholder: 'Podaj email',
+                      value: email,
+                      onChange: (e) => setEmail(e.target.value)
+                    }}
+                  />
+                  <Input
 
-                      // label={'Hasło'}
-                      input={{
-                        id: 'password',
-                        type: 'password',
-                        placeholder: 'Podaj hasło',
-                        value: password,
-                        onChange: (e) => setPassword(e.target.value)
-                      }}
+                    // label={'Hasło'}
+                    input={{
+                      id: 'password',
+                      type: 'password',
+                      placeholder: 'Podaj hasło',
+                      value: password,
+                      onChange: (e) => setPassword(e.target.value)
+                    }}
 
-                    />
-                    <Input
+                  />
+                  <Input
 
-                      // label={'Hasło'}
-                      input={{
-                        id: 'password2',
-                        type: 'password',
-                        placeholder: 'Powtórz hasło',
-                        value: confirmPassword,
-                        onChange: (e) => setConfirmPassword(e.target.value)
-                      }}
+                    // label={'Hasło'}
+                    input={{
+                      id: 'password2',
+                      type: 'password',
+                      placeholder: 'Powtórz hasło',
+                      value: confirmPassword,
+                      onChange: (e) => setConfirmPassword(e.target.value)
+                    }}
 
-                    />
-                    <Button
-                      type={'submit'}
-                      disabled={false}
-                    >
-                      Zaktualizuj
-                    </Button>
-                  </form>
-                </>
-            }
-          </div>
-          {message && <p className={classes.error}>{message}</p>}
-
-
+                  />
+                  <Button
+                    type={'submit'}
+                    disabled={false}
+                    className='button'
+                  >
+                    Zaktualizuj
+                  </Button>
+                </form>
+              </>
+          }
         </div>
+        {message && <p className={classes.error}>{message}</p>}
+
+
       </div>
-    </Layout>
+    </div>
   )
 }
 

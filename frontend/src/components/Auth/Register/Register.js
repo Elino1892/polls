@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { register } from '../../../store/actions/user-actions';
 
 import Input from '../../UI/Input'
@@ -52,78 +52,76 @@ const Register = () => {
   }
 
   return (
-    <Layout>
-      <div className={classes['page-container-login']}>
-        <div className={classes.form}>
-          <div className={classes['form-content']}>
-            {loading ? <LoadingSpinner />
-              : error ? <h2>Błąd: {error}</h2>
-                :
-                <>
-                  <h2>Rejestracja</h2>
-                  <form onSubmit={submitHandler}>
-                    <Input
+    <div className={classes['page-container-login']}>
+      <div className={classes.form}>
+        <div className={classes['form-content']}>
+          {loading ? <LoadingSpinner />
+            : error ? <h2>Błąd: {error}</h2>
+              :
+              <>
+                <h2>Rejestracja</h2>
+                <form onSubmit={submitHandler} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <Input
 
-                      ref={nameInputRef}
-                      // label={'Email'}
-                      input={{
-                        id: 'name',
-                        type: 'text',
-                        placeholder: 'Podaj imie',
+                    ref={nameInputRef}
+                    // label={'Email'}
+                    input={{
+                      id: 'name',
+                      type: 'text',
+                      placeholder: 'Podaj imie',
 
-                      }}
-                    />
-                    <Input
-                      ref={emailInputRef}
-                      // label={'Email'}
-                      input={{
-                        id: 'email',
-                        type: 'email',
-                        placeholder: 'Podaj email',
+                    }}
+                  />
+                  <Input
+                    ref={emailInputRef}
+                    // label={'Email'}
+                    input={{
+                      id: 'email',
+                      type: 'email',
+                      placeholder: 'Podaj email',
 
-                      }}
-                    />
-                    <Input
-                      ref={passwordInputRef}
-                      // label={'Hasło'}
-                      input={{
-                        id: 'password',
-                        type: 'password',
-                        placeholder: 'Podaj hasło',
+                    }}
+                  />
+                  <Input
+                    ref={passwordInputRef}
+                    // label={'Hasło'}
+                    input={{
+                      id: 'password',
+                      type: 'password',
+                      placeholder: 'Podaj hasło',
 
-                      }}
+                    }}
 
-                    />
-                    <Input
-                      ref={confirmPasswordInputRef}
-                      // label={'Hasło'}
-                      input={{
-                        id: 'password2',
-                        type: 'password',
-                        placeholder: 'Powtórz hasło',
+                  />
+                  <Input
+                    ref={confirmPasswordInputRef}
+                    // label={'Hasło'}
+                    input={{
+                      id: 'password2',
+                      type: 'password',
+                      placeholder: 'Powtórz hasło',
 
-                      }}
+                    }}
 
-                    />
-                    <Button
-                      type={'submit'}
-                      disabled={false}
-                    >
-                      Zarejestruj się
-                    </Button>
-                  </form>
-                </>
-            }
-          </div>
-          {message && <p className={classes.error}>{message}</p>}
-          <div className={classes.info}>
-            <p>Masz już konto ?</p>
-            <Link className={classes.info} to={redirect ? `/login?redirect=${redirect}` : '/login'}>Zaloguj się!</Link>
-          </div>
-
+                  />
+                  <Button
+                    type={'submit'}
+                    disabled={false}
+                  >
+                    Zarejestruj się
+                  </Button>
+                </form>
+              </>
+          }
         </div>
+        {message && <p className={classes.error}>{message}</p>}
+        <div className={classes.info}>
+          <p>Masz już konto ?</p>
+          <NavLink className={classes.info} to={'/login'}>Zaloguj się!</NavLink>
+        </div>
+
       </div>
-    </Layout>
+    </div>
   )
 }
 

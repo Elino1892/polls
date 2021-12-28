@@ -1,9 +1,12 @@
-const Button = ({ type, onClick, disabled, className, children }) => {
+import classes from './Button.module.css'
+
+const Button = ({ type, onClick, disabled, className, children, style }) => {
   return <button
     type={type || 'button'}
-    className={className || null}
+    className={className ? className : classes.button}
     onClick={onClick}
     disabled={disabled || false}
+    style={{ margin: '0 auto' }}
   >
     {children}
   </button>

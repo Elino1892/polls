@@ -23,5 +23,13 @@ urlpatterns = [
     # path('api/', include('main.urls'))
     path('api/polls/', include('main.urls.poll_urls')),
     path('api/users/', include('main.urls.user_urls')),
+    path('api/groups/', include('main.urls.group_urls')),
+    path('api/user-groups/', include('main.urls.userGroup_urls')),
+    path('api/user-polls/', include('main.urls.userPoll_urls')),
+    path('api/user-answer/', include('main.urls.userAnswer_urls')),
+    path('api/polls-groups/', include('main.urls.pollGroup_urls')),
+    path('api/questions/', include('main.urls.question_urls')),
+    path('api/poll-questions/', include('main.urls.pollQuestions_urls')),
+    path('api/answers/', include('main.urls.answers_urls')),
 ]
  

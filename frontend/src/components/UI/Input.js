@@ -1,11 +1,11 @@
 import { forwardRef } from "react";
 
 
-const Input = forwardRef(({ input, label }, ref) => {
+const Input = forwardRef(({ input, label, onChange }, ref) => {
   return (
     <div>
       {label && <label htmlFor={input.id}>{label}</label>}
-      <input ref={ref} {...input}>
+      <input onChange={onChange} ref={ref} {...input}>
       </input>
     </div>
   )

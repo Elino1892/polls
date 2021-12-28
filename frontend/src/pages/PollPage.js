@@ -1,48 +1,47 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
-import PollItem from "../components/Polls/PollItem";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useSelector, useDispatch } from 'react-redux'
+
+import LoadingSpinner from '../components/UI/LoadingSpinner'
+import Layout from "../components/Layout/Layout/Layout";
+import { getPoll } from "../store/actions/poll-actions";
+import PollForm from "../components/Polls/PollForm/PollForm";
+
 
 
 const PollPage = () => {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const params = useParams();
   const { pollId } = params;
 
-  const [loadedPoll, setLoadedPoll] = useState({});
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin;
+
+  const pollForm = useSelector(state => state.pollForm)
+  const { poll } = pollForm;
+
 
   useEffect(() => {
-    const fetchPoll = async () => {
-      const respone = await fetch(`/api/polls/${pollId}`);
-      if (!respone.ok) {
-        throw new Error('Coś poszło nie tak!');
+    if (!userInfo) {
+      navigate('/login')
+    } else {
+      if (pollId) {
+        dispatch(getPoll(pollId))
       }
-
-      const responeData = await respone.json();
-
-      const poll = {
-        id: responeData.ID,
-        name: responeData.poll_name,
-        description: responeData.poll_description,
-        deadline: responeData.deadline,
-      }
-
-
-      // for (const key in responeData) {
-      //   polls.push({
-      //     id: key,
-      //     name: responeData[key].poll_name,
-      //     description: responeData[key].poll_description,
-      //     deadline: responeData[key].deadline,
-      //   });
-      // }
-
-      setLoadedPoll(poll);
     }
-    fetchPoll();
-  }, [pollId])
+  }, [dispatch, navigate, userInfo, pollId])
+
+
 
   return (
-    <PollItem name={loadedPoll.name} description={loadedPoll.description} deadline={loadedPoll.description} />
+    <>
+      {Object.keys(poll).length === 0 ? <LoadingSpinner />
+        : <PollForm poll={poll} />
+      }
+    </>
   )
 }
 

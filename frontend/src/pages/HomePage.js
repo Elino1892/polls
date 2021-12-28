@@ -6,11 +6,10 @@ import Header from "../components/Layout/Header/Header";
 import Layout from "../components/Layout/Layout/Layout";
 
 const HomePage = () => {
-  return <Layout>
+  return <>
     <Header />
     <About />
-    {/* <AvailablePolls /> */}
-  </Layout>
+  </>
 }
 
 export default HomePage;

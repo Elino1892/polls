@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { login } from '../../../store/actions/user-actions';
 
 import Input from '../../UI/Input'
@@ -22,16 +22,18 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  // const redirect = location.search ? location.search.split('=')[1] : '/polls'
 
   const userLogin = useSelector(state => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
-      navigate(redirect, { replace: true })
+    if (userInfo && userInfo.isAdmin) {
+      navigate('/admin/userlist', { replace: true })
+    } else if (userInfo) {
+      navigate('/polls', { replace: true })
     }
-  }, [navigate, userInfo, redirect])
+  }, [navigate, userInfo, dispatch])
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -44,58 +46,56 @@ const Login = () => {
   }
 
   return (
-    <Layout>
-      <div className={classes['page-container-login']}>
-        <div className={classes.form}>
+    <div className={classes['page-container-login']}>
+      <div className={classes.form}>
 
-          <div className={classes['form-content']}>
+        <div className={classes['form-content']}>
 
 
-            {loading ? <LoadingSpinner />
-              : error ? <h2>Błąd: {error}</h2>
-                :
-                <>
-                  <h2>Logowanie</h2>
-                  <form onSubmit={submitHandler}>
-                    <Input
-                      ref={emailInputRef}
-                      // label={'Email'}
-                      input={{
-                        id: 'email',
-                        type: 'email',
-                        placeholder: 'Podaj email'
-                      }}
-                    />
-                    <Input
-                      ref={passwordInputRef}
-                      // label={'Hasło'}
-                      input={{
-                        id: 'password',
-                        type: 'password',
-                        placeholder: 'Podaj hasło'
-                      }}
+          {loading ? <LoadingSpinner />
+            : error ? <h2>Błąd: {error}</h2>
+              :
+              <>
+                <h2>Logowanie</h2>
+                <form onSubmit={submitHandler} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <Input
+                    ref={emailInputRef}
+                    // label={'Email'}
+                    input={{
+                      id: 'email',
+                      type: 'email',
+                      placeholder: 'Podaj email'
+                    }}
+                  />
+                  <Input
+                    ref={passwordInputRef}
+                    // label={'Hasło'}
+                    input={{
+                      id: 'password',
+                      type: 'password',
+                      placeholder: 'Podaj hasło'
+                    }}
 
-                    />
-                    <Button
-                      type={'submit'}
-                      disabled={false}
-                    >
-                      Zaloguj się
-                    </Button>
-                  </form>
-                </>
-            }
-          </div>
-
-          {message && <p className={classes.error}>{message}</p>}
-          <div className={classes.info}>
-            <p>Nie masz konta ?</p>
-            <Link className={classes.info} to={redirect ? `/register?redirect=${redirect}` : '/register'}>Zarejestruj się!</Link>
-          </div>
-
+                  />
+                  <Button
+                    type={'submit'}
+                    disabled={false}
+                  >
+                    Zaloguj się
+                  </Button>
+                </form>
+              </>
+          }
         </div>
+
+        {message && <p className={classes.error}>{message}</p>}
+        <div className={classes.info}>
+          <p>Nie masz konta ?</p>
+          <NavLink className={classes.info} to={'/register'}>Zarejestruj się!</NavLink>
+        </div>
+
       </div>
-    </Layout>
+    </div>
   )
 }
 
