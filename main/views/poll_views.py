@@ -323,6 +323,7 @@ def deletePoll(request, pk):
 
 
 @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
 def downloadReport(request, pk):
   user = request.user
 
