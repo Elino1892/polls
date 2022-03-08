@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'kfd@4!=nir17n&-x+wssy*b96b30)zs6dmdf#g=rj)1)gno-t5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://polls-app-project.herokuapp.com']
 

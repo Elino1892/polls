@@ -1,1 +1,1 @@
-web: gunicorn --chdir backend backend.wsgi
+web: gunicorn --chdir polls_app polls_app.wsgi
