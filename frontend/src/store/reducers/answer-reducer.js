@@ -33,9 +33,6 @@ export const sentAnswerFromUserReducer = (state, action) => {
     case SENT_ANSWER_FROM_USER_FAIL:
       return { loading: false, error: action.payload }
 
-    // case ANSWER_RESET:
-    //   return { }
-
     default:
       return state
   }

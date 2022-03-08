@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate, NavLink } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { register } from '../../../store/actions/user-actions';
 
 import Input from '../../UI/Input'
 import Button from '../../UI/Button'
-import Layout from '../../Layout/Layout/Layout';
 import LoadingSpinner from '../../UI/LoadingSpinner';
 
 import classes from './Register.module.css'
@@ -64,7 +63,6 @@ const Register = () => {
                   <Input
 
                     ref={nameInputRef}
-                    // label={'Email'}
                     input={{
                       id: 'name',
                       type: 'text',
@@ -74,7 +72,6 @@ const Register = () => {
                   />
                   <Input
                     ref={emailInputRef}
-                    // label={'Email'}
                     input={{
                       id: 'email',
                       type: 'email',
@@ -84,7 +81,6 @@ const Register = () => {
                   />
                   <Input
                     ref={passwordInputRef}
-                    // label={'Hasło'}
                     input={{
                       id: 'password',
                       type: 'password',
@@ -95,7 +91,6 @@ const Register = () => {
                   />
                   <Input
                     ref={confirmPasswordInputRef}
-                    // label={'Hasło'}
                     input={{
                       id: 'password2',
                       type: 'password',

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from 'react-redux'
 
 import LoadingSpinner from '../components/UI/LoadingSpinner'
-import Layout from "../components/Layout/Layout/Layout";
 import { getPoll } from "../store/actions/poll-actions";
 import PollForm from "../components/Polls/PollForm/PollForm";
 

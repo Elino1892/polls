@@ -25,25 +25,19 @@ def getGroup(request, pk):
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createGroup(request):
-    # user = request.user
     data = request.data
-
-    # print(data)
 
     group = GroupOfUsers.objects.create(
       group_name = data['name']
     )
 
     for user in data['users']:
-      # print(user)
-      # print('\n')
       userInstance = User.objects.get(id = user['id'])
       UserGroup.objects.create(
         user = userInstance,
         group = group
       )
 
-    # serializer = GroupSerializer(group, many=False)
     return Response()
 
 

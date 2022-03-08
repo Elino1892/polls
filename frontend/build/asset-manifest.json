@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b21481b9.chunk.css",
+    "main.js": "/static/js/main.445a7071.chunk.js",
+    "main.js.map": "/static/js/main.445a7071.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ff5b8ea4.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ff5b8ea4.js.map",
+    "static/css/2.383c0125.chunk.css": "/static/css/2.383c0125.chunk.css",
+    "static/js/2.7b8cbd27.chunk.js": "/static/js/2.7b8cbd27.chunk.js",
+    "static/js/2.7b8cbd27.chunk.js.map": "/static/js/2.7b8cbd27.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.383c0125.chunk.css.map": "/static/css/2.383c0125.chunk.css.map",
+    "static/css/main.b21481b9.chunk.css.map": "/static/css/main.b21481b9.chunk.css.map",
+    "static/js/2.7b8cbd27.chunk.js.LICENSE.txt": "/static/js/2.7b8cbd27.chunk.js.LICENSE.txt",
+    "static/media/about-1.a9afc77f.jpeg": "/static/media/about-1.a9afc77f.jpeg",
+    "static/media/about-2.8f11309b.jpeg": "/static/media/about-2.8f11309b.jpeg",
+    "static/media/Header.module.css": "/static/media/banner.c5825de9.jpeg",
+    "static/media/logo-weii.3b7abcc3.png": "/static/media/logo-weii.3b7abcc3.png",
+    "static/media/PollList.module.css": "/static/media/poll.dfc6a8c8.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff5b8ea4.js",
+    "static/css/2.383c0125.chunk.css",
+    "static/js/2.7b8cbd27.chunk.js",
+    "static/css/main.b21481b9.chunk.css",
+    "static/js/main.445a7071.chunk.js"
+  ]
+}

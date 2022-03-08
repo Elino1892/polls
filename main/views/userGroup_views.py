@@ -15,7 +15,4 @@ def getUserGroups(request):
   serializer = UserGroupSerializer(user_groups, many = True)
   return Response(serializer.data)
 
-# @api_view(['POST'])
-# def setUserGroup(request):
-#   group = request.data
 

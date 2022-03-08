@@ -1,6 +1,4 @@
-// import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-// import classes from './PollList.module.css'
 import Button from '../UI/Button'
 import { LinkContainer } from 'react-router-bootstrap';
 import { downloadReport } from '../../store/actions/poll-actions';
@@ -22,7 +20,6 @@ const PollItem = ({ name, description, deadline, id, isFinished, groupName }) =>
         <p>{deadline.slice(11, 19)}</p>
       </td>
       <td>{groupName}</td>
-      {/* <li className={`${classes.item} ${classes.button}`}> */}
       {!isFinished
         ?
         <td>
@@ -45,7 +42,6 @@ const PollItem = ({ name, description, deadline, id, isFinished, groupName }) =>
           <td style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}> <Button style={{ margin: '0 auto' }} onClick={downloadReportHandler}>Raport</Button></td>
         </>
       }
-      {/* </li> */}
     </>)
 }
 

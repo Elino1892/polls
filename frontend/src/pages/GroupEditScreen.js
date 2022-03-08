@@ -4,8 +4,6 @@ import { useParams, useNavigate } from 'react-router'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
-// import Message from '../components/Message'
-import Layout from '../components/Layout/Layout/Layout'
 import FormContainer from '../components/UI/FormContainer'
 import { getGroupDetails, updateGroup } from '../store/actions/group-actions'
 import { GROUP_DETAILS_RESET } from "../constants/groupsConstants"
@@ -13,7 +11,6 @@ import { GROUP_DETAILS_RESET } from "../constants/groupsConstants"
 
 function GroupEditScreen() {
 
-  // const productId = match.params.id
   const params = useParams();
   const { id: groupId } = params;
 

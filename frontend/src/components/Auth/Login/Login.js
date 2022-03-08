@@ -1,11 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { login } from '../../../store/actions/user-actions';
 
 import Input from '../../UI/Input'
 import Button from '../../UI/Button'
-import Layout from '../../Layout/Layout/Layout';
 import LoadingSpinner from '../../UI/LoadingSpinner';
 
 import classes from './Login.module.css'
@@ -13,7 +12,6 @@ import classes from './Login.module.css'
 const Login = () => {
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [message, setMessage] = useState('');
 
@@ -21,8 +19,6 @@ const Login = () => {
   const passwordInputRef = useRef();
 
   const dispatch = useDispatch();
-
-  // const redirect = location.search ? location.search.split('=')[1] : '/polls'
 
   const userLogin = useSelector(state => state.userLogin);
   const { loading, error, userInfo } = userLogin;
@@ -60,7 +56,6 @@ const Login = () => {
                 <form onSubmit={submitHandler} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <Input
                     ref={emailInputRef}
-                    // label={'Email'}
                     input={{
                       id: 'email',
                       type: 'email',
@@ -69,7 +64,6 @@ const Login = () => {
                   />
                   <Input
                     ref={passwordInputRef}
-                    // label={'Hasło'}
                     input={{
                       id: 'password',
                       type: 'password',

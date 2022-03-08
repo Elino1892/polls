@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import Button from '../UI/Button'
 
@@ -12,7 +11,6 @@ const PollFinished = () => {
           Moje ankiety
         </Button>
       </LinkContainer>
-      {/* <Link to="/polls">Moje ankiety</Link> */}
     </div>
   )
 }

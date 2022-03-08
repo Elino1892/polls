@@ -74,10 +74,8 @@ const PollDescription = () => {
   const getGroupFromInput = (e) => {
     const tempArray = [...groupList]
     const { value, id } = e.target;
-
-
-    // console.log(e.target)
     const index = tempArray.findIndex(group => group.ID === id)
+
     if (index === -1) {
       const groupObject = {
         ID: id,
@@ -87,26 +85,16 @@ const PollDescription = () => {
     } else {
       tempArray.splice(index, 1)
     }
-    // console.log(tempArray)
+
     setGroups(tempArray);
     checkClickedCheckbox(tempArray);
   }
 
-  // const clickEverybodyCheckboxHandler = () => {
-  //   setisClickedEverybodyCheckbox(() => !isClickedEverybodyCheckbox)
-  // }
-
-  // const clickAnotherCheckboxHandler = () => {
-  //   setisClickedAnotherCheckbox(() => !isClickedAnotherCheckbox)
-  // }
 
   return (
     <>
       {!loading ?
         <>
-
-          {/* <input disabled={isSaved} ref={namePollInputRef} type="text" placeholder="Nazwa ankiety" /> */}
-          {/* <Form.Group> */}
           <Card>
             <Card.Body>
               <Form.Group className="mb-3" controlId="formPollName">
@@ -134,10 +122,6 @@ const PollDescription = () => {
                   groups.map(group => {
                     if (group.group_name === 'Wszyscy') {
                       return (
-                        // <label key={group.ID} >
-                        //   <input onChange={getGroupFromInput} disabled={isSaved || isClickedAnotherCheckbox} type="checkbox" name={group.group_name} id={group.ID} value={group.group_name} />
-                        //   {group.group_name}
-                        // </label>
                         <Form.Check
                           key={group.ID}
                           inline
@@ -153,10 +137,6 @@ const PollDescription = () => {
 
                     else {
                       return (
-                        // <label key={group.ID} >
-                        //   <input onChange={getGroupFromInput} disabled={isSaved || isClickedEverybodyCheckbox} type="checkbox" name={group.group_name} id={group.ID} value={group.group_name} />
-                        //   {group.group_name}
-                        // </label>
                         <Form.Check
                           key={group.ID}
                           inline
@@ -188,23 +168,13 @@ const PollDescription = () => {
 
             </Card.Body>
             {!isSaved ? <div className={classes["poll-description-menu"]}>
-              {/* <button type="button" onClick={savePollDescriptionHandler}>Zapisz</button> */}
               <Button variant="success" type="button" onClick={savePollDescriptionHandler}>Zapisz</Button>
             </div> :
               <div className={classes["poll-description-menu"]}>
-                {/* <button type="button" onClick={editPollDescriptionHandler}>Edytuj</button> */}
                 <Button variant="primary" type="button" onClick={editPollDescriptionHandler}>Edytuj</Button>
               </div>
             }
           </Card>
-          {/* </Form.Group> */}
-          {/* <textarea disabled={isSaved} ref={descriptionPollInputRef} name="desc" id="desc" rows="1" placeholder="Opis..."></textarea> */}
-          {/* <p>Grupa użytkowników:</p> */}
-
-          {/* <label htmlFor="date-deadline">Termin zakończenia:
-            <input disabled={isSaved} ref={deadlinePollInputRef} type="datetime-local" name="date-deadline" id="date-deadline" min={new Date().toISOString().split(".")[0]} />
-          </label> */}
-
         </ > :
         <LoadingSpinner />
       }

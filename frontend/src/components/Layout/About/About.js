@@ -1,5 +1,8 @@
 import classes from './About.module.css'
 
+import about1 from '../../../images/about-1.jpeg'
+import about2 from '../../../images/about-2.jpeg'
+
 const About = () => {
   return (
     <div className={classes.about}>
@@ -11,7 +14,7 @@ const About = () => {
         </p>
 
         <div className={classes["about-image-1"]}>
-          <img src="../../../images/about-1.jpeg" alt="about1" />
+          <img src={about1} alt="about1" />
         </div>
 
         <p className={classes["about-text-2"]}>
@@ -20,7 +23,6 @@ const About = () => {
           a także i obrazki.
         </p>
 
-        {/* Inna struktura na większe rozdzielczości - potrzebne do flexboxa*/}
         <div className={classes["about-text"]}>
           <p className={classes["about-text-p1"]}>
             Zapoznaj się z opinią innych na wybrany przez ciebie temat lub wyraź swoją opinię wypełniając
@@ -44,7 +46,7 @@ const About = () => {
         </p>
 
         <div className={classes["about-image-2"]}>
-          <img src="../../../images/about-2.jpeg" alt="about2" />
+          <img src={about2} alt="about2" />
         </div>
 
         <p className={classes["about-text-2"]}>
@@ -53,7 +55,6 @@ const About = () => {
           pytanie wybrała większość osób.
         </p>
 
-        {/* Inna struktura na większe rozdzielczości - potrzebne do flexboxa */}
         <div className={classes["about-text"]}>
           <p className={classes["about-text-p1"]}>
             Jako autor ankiety masz dostęp do danych zebranych podczas udzielania odpowiedzi przez innych

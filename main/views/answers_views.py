@@ -14,16 +14,6 @@ def getAnswers(request):
   serializer = AnswersSerializer(answers, many = True)
   return Response(serializer.data)
 
-# @api_view(['GET'])
-# # @permission_classes([IsAuthenticated])
-# def showAnswersInFilledPoll(request, pk):
-
-#   poll = Poll.objects.get(ID = pk)
-
-
-#   answers = Answer.objects.all()
-#   serializer = AnswersSerializer(answers, many = True)
-#   return Response(serializer.data)
 
 
 @api_view(['PUT', 'POST'])
@@ -31,12 +21,8 @@ def getAnswers(request):
 def updateAnswersFromUser(request, pk):
 
   answers_from_user = request.data
-  # print(answers_from_user)
-  # user = request.data['user']
-  # print(user)
+
   user = request.user
-  # print(user.id)
-  # print(pk)
 
   answers = Answer.objects.all()
 
@@ -66,9 +52,6 @@ def updateAnswersFromUser(request, pk):
   user_poll.isFinished = True
   user_poll.save()
 
-  # serializer_user_poll = PollSerializer(user_poll, many = False)
-
-  # print(serializer_user_poll)
 
 
   serializer_answers = AnswersSerializer(answers, many = True)

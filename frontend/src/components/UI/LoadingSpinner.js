@@ -1,4 +1,3 @@
-import classes from './LoadingSpinner.module.css';
 import { Spinner } from 'react-bootstrap'
 
 const LoadingSpinner = () => {

@@ -1,15 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from datetime import datetime
 
-# class User(models.Model):
-#     ID = models.AutoField(primary_key=True, editable=False)
-#     username = models.CharField(max_length=50)
-#     email = models.CharField(max_length=50)
-#     password = models.CharField(max_length=50)
-
-#     def __str__(self):
-#         return self.username
 
 class Poll(models.Model):
     ID = models.AutoField(primary_key=True)
@@ -17,15 +8,10 @@ class Poll(models.Model):
     poll_description = models.TextField(blank=True, null=True)
     deadline = models.DateTimeField()
     isFinished = models.BooleanField(default = False)
-    # createdAt = models.DateTimeField(auto_now_add=True)
-    # @property
-    # def is_past_due(self):
-    #     if(datetime.now() > self.deadline):
-    #         self.isFinished = True
 
     def __str__(self):
         return '%s - %s' % (self.poll_name, self.ID)
-        #  % (answer, self.question)
+
 
 class Question(models.Model):
     ID = models.AutoField(primary_key=True)
@@ -77,9 +63,6 @@ class UserAnswer(models.Model):
     ID = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
-
-    # def __str__(self):
-    #     return '%s : %s' % (self.user, self.answer)
 
 class UserPoll(models.Model):
     ID = models.AutoField(primary_key=True)

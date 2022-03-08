@@ -3,10 +3,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
-// import Message from '../components/Message'
 import { listUsers, deleteUser } from '../store/actions/user-actions'
 import { Container } from 'react-bootstrap'
-import Layout from '../components/Layout/Layout/Layout'
 import { useNavigate } from 'react-router'
 import { USER_DETAILS_RESET } from '../constants/userConstants'
 
@@ -15,7 +13,6 @@ import { USER_DETAILS_RESET } from '../constants/userConstants'
 const UserListScreen = () => {
 
   const [searchEmail, setSearchEmail] = useState('')
-  // const [searchUsers, setSearchUsers] = useState([])
 
   const dispatch = useDispatch();
 
@@ -55,7 +52,6 @@ const UserListScreen = () => {
 
     setSearchEmail(value)
 
-    console.log(searchEmail)
 
   }
 
@@ -66,7 +62,6 @@ const UserListScreen = () => {
         <Form.Control
           type='text'
           placeholder='Wyszukaj użytkownika...'
-          // value={searchEmail}
           onChange={searchEmailHandler}
           style={{ margin: '20px 0' }}
         >

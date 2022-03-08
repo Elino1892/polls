@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router';
 import { ANSWER_QUESTION_CREATE_POLL_RESET } from "../../../constants/answerConstants";
@@ -28,8 +28,6 @@ const CreatePoll = () => {
 
   const removeQuestionWithAnswersHandler = (id) => {
     const questionsAndAnswersTemp = [...questionsAndAnswers];
-    console.log(questionsAndAnswers)
-    console.log(id)
     const tempArray = questionsAndAnswersTemp.filter(item => item.id !== id)
     setQuestionsAndAnswers(tempArray)
     dispatch({ type: ANSWER_QUESTION_CREATE_POLL_RESET })
@@ -37,11 +35,9 @@ const CreatePoll = () => {
 
   const addQuestionWithAnswers = () => {
     const questionsAndAnswersTemp = [...questionsAndAnswers];
-    // const randomNumber = Math.floor(Math.random() * 1000000)
     questionsAndAnswersTemp.push(<PollQuestionAnswers key={questionsAndAnswersTemp.length} id={questionsAndAnswersTemp.length} onRemoveQuestionWithAnswers={removeQuestionWithAnswersHandler} />)
 
     setQuestionsAndAnswers(questionsAndAnswersTemp)
-    // console.log(questionsAndAnswers)
     dispatch({ type: ANSWER_QUESTION_CREATE_POLL_RESET })
   }
 

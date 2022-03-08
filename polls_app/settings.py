@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -12,7 +13,7 @@ SECRET_KEY = 'kfd@4!=nir17n&-x+wssy*b96b30)zs6dmdf#g=rj)1)gno-t5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://polls-app-project.herokuapp.com']
 
 
 # Application definition
@@ -160,15 +161,19 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
+    BASE_DIR / 'static',
     BASE_DIR / 'frontend/build/static'
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+if os.getcwd() == '/app':
+    DEBUG = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

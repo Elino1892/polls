@@ -1,6 +1,5 @@
 import PollItem from "./PollItem";
-import classes from './PollList.module.css'
-import { Table, Alert } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 
 const PollList = ({ groupName, polls, isCompleted }) => {
 
@@ -19,7 +18,6 @@ const PollList = ({ groupName, polls, isCompleted }) => {
       </thead>
       <tbody>
         {polls.map(poll =>
-          // const randomNumber = Math.floor(Math.random() * 1000);
           <tr key={poll.pollID}>
 
             <PollItem
@@ -37,23 +35,6 @@ const PollList = ({ groupName, polls, isCompleted }) => {
         }
       </tbody>
     </Table>
-    // :
-    // (
-    //   !isCompleted ?
-    //     <Alert variant="info">
-    //       Brak dostępnych ankiet
-    //     </Alert >
-    //     :
-    //     <Alert variant="info">
-    //       Brak zakończonych ankiet
-    //     </Alert >
-
-    // )
-
-    // <div className={classes.polls}>
-    // <h2>{groupName}</h2>
-
-    // </div >
   )
 }
 

@@ -4,13 +4,9 @@ import { useNavigate } from 'react-router'
 import { Table, Button, Row, Col, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
-// import Message from '../components/Message'
 import { Container } from 'react-bootstrap'
-import Layout from '../components/Layout/Layout/Layout'
-// import Paginate from '../components/Paginate'
 import { allGroups, deleteGroup } from '../store/actions/group-actions'
 import { listUsers } from '../store/actions/user-actions'
-// import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 function GroupListScreen() {
 
@@ -23,35 +19,27 @@ function GroupListScreen() {
   const { loading, error, groups } = allGroupList
 
   const userList = useSelector(state => state.userList)
-  const { loading: loadingUserList, error: errorUserList, users } = userList
+  const { loading: loadingUserList, users } = userList
 
 
   const groupDelete = useSelector(state => state.groupDelete)
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = groupDelete
 
-  // const productCreate = useSelector(state => state.productCreate)
-  // const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate
-
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  // let keyword = history.location.search
   useEffect(() => {
-    // dispatch({ type: PRODUCT_CREATE_RESET })
 
     if (!userInfo.isAdmin) {
       navigate('/login')
     }
 
-    // if (successCreate) {
-    // navigate(`/admin/group/${createdGroup.id}/edit`)
-    // } else {
     dispatch(allGroups())
     dispatch(listUsers())
-    // }
 
-  }, [dispatch, userInfo, navigate, successDelete/*, successCreate, createdProduct*/])
+
+  }, [dispatch, userInfo, navigate, successDelete])
 
 
   const deleteHandler = (id) => {
@@ -63,7 +51,6 @@ function GroupListScreen() {
   }
 
   const createGroupHandler = () => {
-    // dispatch(createGroup())
     navigate('/admin/group/create')
   }
 
@@ -83,7 +70,6 @@ function GroupListScreen() {
           <Form.Control
             type='text'
             placeholder='Wyszukaj grupę...'
-            // value={searchEmail}
             onChange={(e) => setSearchGroup(e.target.value)}
             style={{ margin: '20px 0' }}
           />
@@ -91,10 +77,6 @@ function GroupListScreen() {
 
         {loadingDelete && <LoadingSpinner />}
         {errorDelete && <p>Błąd: {errorDelete}</p>}
-
-
-        {/* {loadingCreate && <LoadingSpinner />}
-      {errorCreate && <p>Błąd: {errorCreate}</p>} */}
 
         {loading || loadingUserList
           ? (<LoadingSpinner />)
@@ -146,7 +128,6 @@ function GroupListScreen() {
                     ))}
                   </tbody>
                 </Table>
-                {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
               </div>
             )}
       </div>

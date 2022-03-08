@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import {
   POLL_LIST_REQUEST,
   POLL_LIST_SUCCESS,
@@ -34,8 +34,6 @@ export const listPolls = () => async (dispatch) => {
 
     const polls = [];
 
-    // console.log(data)
-
     for (const key in data) {
       polls.push({
         id: data[key].poll.ID,
@@ -48,8 +46,6 @@ export const listPolls = () => async (dispatch) => {
         questions: data[key].questions,
       });
     }
-
-    console.log(polls)
 
     dispatch({
       type: POLL_LIST_SUCCESS,
@@ -164,7 +160,6 @@ export const sentNewPoll = (pollDescription, questionsAndAnswers) => async (disp
       questionsAndAnswers
     }
 
-    // console.log(newPoll)
 
     const config = {
       headers: {
@@ -218,7 +213,6 @@ export const downloadReport = (name, isAdmin) => async (dispatch) => {
       link.setAttribute('download', outputFilename);
       document.body.appendChild(link);
       link.click();
-      // console.log(data)
     } catch (error) {
       throw Error(error);
     }

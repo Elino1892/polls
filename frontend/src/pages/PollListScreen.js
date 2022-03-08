@@ -4,9 +4,7 @@ import { Table, Button, Row, Col, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
 import { Container } from 'react-bootstrap'
-import Layout from '../components/Layout/Layout/Layout'
 import { listPolls, deletePoll, downloadReport } from '../store/actions/poll-actions'
-// import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 function PollListScreen() {
 
@@ -19,40 +17,19 @@ function PollListScreen() {
   const pollList = useSelector(state => state.pollList);
   const { error, polls, loading } = pollList;
 
-  // const allGroupList = useSelector(state => state.allGroupList)
-  // const { loading, error, groups } = allGroupList
-
-  // const userList = useSelector(state => state.userList)
-  // const { loading: loadingUserList, error: errorUserList, users } = userList
-
-
-  // const groupDelete = useSelector(state => state.groupDelete)
-  // const { loading: loadingDelete, error: errorDelete, success: successDelete } = groupDelete
-
-  // const productCreate = useSelector(state => state.productCreate)
-  // const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate
-
-
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
   const pollDelete = useSelector(state => state.pollDelete)
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = pollDelete
 
-  // let keyword = history.location.search
   useEffect(() => {
-    // dispatch({ type: PRODUCT_CREATE_RESET })
 
     if (!userInfo.isAdmin) {
       navigate('/login')
     }
 
-    // if (successCreate) {
-    // navigate(`/admin/polllist`)
-    // } else {
     dispatch(listPolls())
-    // dispatch(listUsers())
-    // }
 
   }, [dispatch, userInfo, navigate, successDelete])
 
@@ -66,7 +43,6 @@ function PollListScreen() {
   }
 
   const createPollHandler = () => {
-    // dispatch(createGroup())
     navigate('/polls/create-poll')
   }
 
@@ -88,11 +64,7 @@ function PollListScreen() {
             </Table></td>
           </tr >)
 
-        // <td style={{ height: '160px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{answer.answer}</td>
 
-
-        // console.log(answers)
-        // return answers
       }
       case question.question.is_multi_choice: {
         return (
@@ -147,20 +119,15 @@ function PollListScreen() {
             </Button>
 
           </Col>
-          {/* <Col>
-            
-          </Col> */}
           <Form.Control
             type='text'
             placeholder='Wyszukaj ankietę...'
-            // value={searchEmail}
             onChange={(e) => setSearchPoll(e.target.value)}
             style={{ margin: '20px 0' }}
           />
           <Form.Control
             type='text'
             placeholder='Wyszukaj użytkownika...'
-            // value={searchEmail}
             onChange={(e) => setSearchUser(e.target.value)}
             style={{ marginBottom: '10px' }}
           />
@@ -248,7 +215,6 @@ function PollListScreen() {
                             <Button variant='dark' className='btn-sm' onClick={() => dispatch(downloadReport(poll.name, true))}>
                               <i className='fas fa-file'></i>
                             </Button>
-                            {/* <Button onClick={() => console.log()}>Raport</Button> */}
                             <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(poll.id)}>
                               <i className='fas fa-trash'></i>
                             </Button>
@@ -258,7 +224,6 @@ function PollListScreen() {
                     ))}
                   </tbody>
                 </Table>
-                {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
               </div>
             )}
       </div>

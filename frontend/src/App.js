@@ -13,7 +13,6 @@ import UserListScreen from './pages/UserListScreen';
 import UserEditScreen from './pages/UserEditScreen';
 import GroupListScreen from './pages/GroupListScreen';
 
-import { Container } from 'react-bootstrap'
 import GroupEditScreen from './pages/GroupEditScreen';
 import GroupCreateScreen from './pages/GroupCreateScreen';
 import PollListScreen from './pages/PollListScreen';

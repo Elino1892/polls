@@ -14,5 +14,4 @@ urlpatterns = [
   path('admin/report/<str:pk>', views.downloadReportAdmin, name="downloadReportAdmin"),
   path('all-data', views.getPollsWithAll, name="polls-with-all"),
   path('delete/<str:pk>/', views.deletePoll, name="poll-delete")
-  # path('<str:pk>/', views.getPoll, name="poll"),
 ]

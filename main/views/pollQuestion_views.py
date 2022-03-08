@@ -48,7 +48,6 @@ def getQuestionsByPollId(request,pk):
     answers_dict.append(dict(x))
 
   questions_and_answers = []
-  # answer={}
 
   for question in questions_dict:
     for poll_question in poll_questions_dict:
@@ -71,60 +70,36 @@ def getQuestionsByPollId(request,pk):
                     "id": ans['ID'],
                     "answer_text": ans['answer'],
                     "isMarked": ans['is_marked']
-                    # "type": 'is_single_choice'
                 }
               elif question['type']['is_multi_choice']:
                 answer = {
                   "id": ans['ID'],
                   "answer_text": ans['answer'],
                   "isMarked": ans['is_marked']
-                  # "type": 'is_multi_choice'
                 }
               elif question['type']['is_open']:
                 answer = {
                   "id": ans['ID'],
                   "answer_text": '',
                   "openAnswer": ans['open_answer']
-                  # "type": 'is_open'
                 }
               elif question['type']['is_date_choice']:
                 answer = {
                   "id": ans['ID'],
                   "answer_text": '',
                   "dateAnswer": ans['date_answer']
-                  # "type": 'is_date_choice'
                 }
               question['answers'].append(answer)
-          # break
-        # else:
-        #   print(question['ID'])
-        #   print(poll_question['question'])
-        #   break
     try:
       if 'type' in question:
         questions_and_answers.append(question)
     except:
       None
     
-    
-        # print(type(question))
-    
-
-    # print(questions_and_answers)
-
-
-  # context = [
-  #   {"poll_info": serializer_poll.data},
-  #   {"questions_answers": questions_and_answers},
-  #   # "poll_question": serializer_poll_question.data,
-  #   # "all_questions": serializer_question.data,
-  # ]
 
     context = {
     "poll_info": serializer_poll.data,
     "questions_answers": questions_and_answers,
-    # "poll_question": serializer_poll_question.data,
-    # "all_questions": serializer_question.data,
     }
 
   return Response(context)

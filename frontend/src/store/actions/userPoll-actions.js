@@ -23,13 +23,11 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
 
     const { data: polls } = await axios.get('/api/polls');
 
-    // console.log(polls);
 
     const userAvailablePolls = []
 
     const { data: pollsGroups } = await axios.get('/api/polls-groups');
 
-    // debugger
 
     polls.forEach(poll => {
       userPollsID.forEach((userPollID) => {
@@ -84,13 +82,6 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
     })
 
 
-
-
-
-
-
-    // console.log(userPollsList)
-
     const tempUserPolls = [...userPollsList]
 
     for (let i = 0; i < tempUserPolls.length; i++) {
@@ -102,8 +93,6 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
     }
 
     const groupWithPolls = [];
-
-    // debugger
 
     tempUserPolls.forEach(userPoll => {
 
@@ -124,14 +113,9 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
       }
 
       else {
-        // debugger
+
         groupWithPolls.forEach(groupWithPoll => {
-          // groupWithPoll.polls.forEach(item => {
-          // for (let i = 0; i < groupWithPoll.polls; i++) {
 
-
-
-          // console.log(groupWithPoll)
           if (userPoll.groupName !== groupWithPoll.groupName) {
             const poll = {
               groupName: userPoll.groupName,
@@ -162,27 +146,20 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
               }
             })
           }
-          // }
         })
-        // })
       }
     })
-    // console.log(groupWithPolls)
 
-    // const deletedID = []
-    // debugger
     for (let i = 0; i < groupWithPolls.length; i++) {
       for (let j = i + 1; j < groupWithPolls.length; j++) {
         if (groupWithPolls[i].groupName === groupWithPolls[j].groupName) {
           groupWithPolls[j] = '';
-          // deletedID.push(j)
         }
       }
     }
 
     const groupWithPollsTemp = groupWithPolls.filter(item => item !== "")
 
-    // debugger
     groupWithPollsTemp.forEach(poll => {
       for (let i = 0; i < poll.polls.length; i++) {
         for (let j = i + 1; j < poll.polls.length; j++) {
@@ -193,21 +170,6 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
       }
       poll.polls = poll.polls.filter(poll => poll !== "")
     })
-
-    // for (let i = 0; i < groupWithPolls.length; i++) {
-    //   for (let j = 0; j < deletedID.length; j++) {
-    //     if (i === deletedID[j]) {
-    //       groupWithPolls.splice(i, 1);
-    //     }
-    //   }
-    // }
-    // debugger
-    // console.log(groupWithPollsTemp)
-
-
-
-
-    // console.log(userPollsList);
 
     dispatch({
       type: USER_POLL_LIST_SUCCESS,

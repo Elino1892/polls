@@ -36,8 +36,6 @@ export const listUserGroups = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_GROUP_LIST_REQUEST })
 
-    console.log('jestem')
-
     const { data: userGroups } = await axios.get('/api/user-groups');
 
     const userGroupsID = []
@@ -64,7 +62,6 @@ export const listUserGroups = (id) => async (dispatch) => {
 
     })
 
-    console.log(userGroupsName)
 
     localStorage.setItem('userGroups', JSON.stringify(userGroupsName))
 

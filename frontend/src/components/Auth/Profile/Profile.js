@@ -6,7 +6,6 @@ import { USER_UPDATE_PROFILE_RESET } from '../../../constants/userConstants';
 
 import Input from '../../UI/Input'
 import Button from '../../UI/Button'
-import Layout from '../../Layout/Layout/Layout';
 import LoadingSpinner from '../../UI/LoadingSpinner';
 
 import classes from './Profile.module.css'
@@ -86,8 +85,6 @@ const Profile = () => {
                     }}
                   />
                   <Input
-
-                    // label={'Email'}
                     input={{
                       id: 'email',
                       type: 'email',
@@ -97,8 +94,6 @@ const Profile = () => {
                     }}
                   />
                   <Input
-
-                    // label={'Hasło'}
                     input={{
                       id: 'password',
                       type: 'password',
@@ -109,8 +104,6 @@ const Profile = () => {
 
                   />
                   <Input
-
-                    // label={'Hasło'}
                     input={{
                       id: 'password2',
                       type: 'password',

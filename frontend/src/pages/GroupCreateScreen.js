@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useParams, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
-// import Message from '../components/Message'
-import Layout from '../components/Layout/Layout/Layout'
 import FormContainer from '../components/UI/FormContainer'
 import { createGroup } from '../store/actions/group-actions'
 import { GROUP_CREATE_RESET } from "../constants/groupsConstants"
@@ -13,10 +11,6 @@ import { listUsers } from '../store/actions/user-actions'
 
 
 function GroupCreateScreen() {
-
-  // const productId = match.params.id
-  // const params = useParams();
-  // const { id: groupId } = params;
 
   const [searchUser, setSearchUser] = useState('')
   const [name, setName] = useState('')
@@ -28,9 +22,6 @@ function GroupCreateScreen() {
   const userList = useSelector(state => state.userList)
   const { loading, error, users } = userList
 
-  // const groupDetails = useSelector(state => state.groupDetails)
-  // const { error, loading, group } = groupDetails
-
   const groupCreate = useSelector(state => state.groupCreate)
   const { loading: loadingCreate, error: errorCreate, success: successCreate } = groupCreate
 
@@ -39,35 +30,23 @@ function GroupCreateScreen() {
 
   useEffect(() => {
     dispatch(listUsers())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     dispatch({ type: GROUP_CREATE_RESET })
     if (userInfo && userInfo.isAdmin) {
-      // console.log('wywołanie')
-
-      // setUsersGroup()
     } else {
       navigate('/login')
     }
 
     if (typeof users !== "undefined") {
-      // console.log(users)
       if (users.length) {
         setUsersGroup(new Array(users.length).fill(false))
       }
     }
 
     if (successCreate) {
-      //   dispatch({ type: GROUP_DETAILS_RESET })
       navigate('/admin/grouplist')
-
-      // } else {
-      //   if (!group.group_name || group.ID !== Number(groupId)) {
-      //     dispatch(getGroupDetails(groupId))
-      //   } else {
-      //     setName(group.group_name)
-      //   }
     }
 
 
@@ -77,14 +56,11 @@ function GroupCreateScreen() {
   const submitHandler = (e) => {
     e.preventDefault()
     const users = addUsersToGroup()
-    console.log(users)
     if (name) {
       dispatch(createGroup({
-        // id: groupId,
         name,
         users
       }))
-      // navigate('/admin/grouplist')
     }
   }
 
@@ -95,24 +71,17 @@ function GroupCreateScreen() {
       index === position ? !item : item
     );
 
-    // console.log(usersGroup)
-
     setUsersGroup(updatedUsersGroup)
-    // console.log(updatedUsersGroup)
   }
 
   const addUsersToGroup = () => {
     const tempUsersGroup = [...usersGroup];
     const tempUsers = [...users];
 
-    // console.log(tempUsersGroup)
-    // console.log(tempUsers)
-
     const array = tempUsersGroup.map((item, index) => item &&
       tempUsers[index].user
     )
     return array.filter(item => item)
-    // console.log(array.filter(item => item))
   }
 
 
@@ -146,7 +115,6 @@ function GroupCreateScreen() {
               <Form.Control
                 type='text'
                 placeholder='Wyszukaj użytkownika...'
-                // value={searchEmail}
                 onChange={(e) => setSearchUser(e.target.value)}
                 style={{ marginBottom: '10px' }}
               />

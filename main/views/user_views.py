@@ -33,18 +33,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-# @api_view(['GET'])
-# def getRoutes(request):
-#   routes = [
-#     '/api/polls/',
-#     '/api/polls/create',
-#     '/api/polls/<id>/',
-#     '/api/polls/delete/<id>/',
-#     '/api/polls/<update>/<id>/',
-#   ]
-#   return Response(routes)
-
-
 @api_view(['POST'])
 def registerUser(request):
   data = request.data
@@ -66,7 +54,7 @@ def registerUser(request):
 
       serializer = UserSerializerWithToken(user, many=False)
       return Response(serializer.data)
-  except:                                             # DODAĆ KOLEJNE WALIDACJE!
+  except:                                       
       message = {'detail': 'Istnieje już użytkownik z tym adresem email!'}
       return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
@@ -112,20 +100,15 @@ def getUsers(request):
       'groups': [],
     }
 
-    # print(data['id'])
     user_group = UserGroup.objects.filter(user = user['id'])
     user_group_serializer = UserGroupSerializer(user_group, many=True)
-    # print(user_group_serializer.data)
 
     for user_group in user_group_serializer.data:
-          # print(user_group)
           group = GroupOfUsers.objects.filter(ID = user_group['group'])
           group_serializer = GroupSerializer(group, many=True)
           user_groups['groups'].append(group_serializer.data[0])
-          # print(group_serializer.data)
     all_users_groups.append(user_groups)
-    # group = GroupOfUsers.objects.filter(ID = user_group_serializer.data.group)
-  # print(all_users_groups)
+
   return Response(all_users_groups)
 
 @api_view(['GET'])
@@ -139,21 +122,16 @@ def getUserById(request, pk):
       'groups': [],
     }
 
-    # print(user_serializer.data)
 
     user_group_instance = UserGroup.objects.filter(user = user_serializer.data['id'])
     user_group_serializer = UserGroupSerializer(user_group_instance, many=True)
 
     
     for user_group in user_group_serializer.data:
-          # print(user_group)
           group = GroupOfUsers.objects.get(ID = user_group['group'])
           group_serializer = GroupSerializer(group, many=False)
-          # print(group_serializer.data)
           user_group_object['groups'].append(group_serializer.data)
     
-    # print(user_group_object)
-
 
     return Response(user_group_object)
 
@@ -164,8 +142,6 @@ def updateUser(request, pk):
     user = User.objects.get(id=pk)
 
     data = request.data
-
-    print(data)
 
     user.first_name = data['name']
     user.username = data['email']
@@ -181,8 +157,6 @@ def updateUser(request, pk):
     everybody_group_serializer = GroupSerializer(everybody_group, many=False)
     id_everybody_group = everybody_group_serializer.data['ID']
 
-    print('\n')
-    print(user_groups_serializer.data)
 
     for user_group in user_groups_serializer.data:
         if(user_group['group'] != id_everybody_group):
@@ -193,7 +167,6 @@ def updateUser(request, pk):
                   user_group_delete.delete()
             else:
               if(group['isBelong']):
-                # print('WSZEDŁEM')
                 groupInstance = GroupOfUsers.objects.get(ID = group['ID'])
                 UserGroup.objects.create(
                   user = user,
@@ -202,7 +175,6 @@ def updateUser(request, pk):
     if(len(user_groups) == 1 and user_groups_serializer.data[0]['group'] ==  id_everybody_group):
       for group in data['userGroups']:
         if(group['isBelong'] and group['ID'] != id_everybody_group):
-          print('WSZEDŁEM')
           groupInstance = GroupOfUsers.objects.get(ID = group['ID'])
           UserGroup.objects.create(
               user = user,

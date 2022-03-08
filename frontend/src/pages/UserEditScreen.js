@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
-import Layout from '../components/Layout/Layout/Layout'
 import { getUserDetails, updateUser } from '../store/actions/user-actions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 import FormContainer from '../components/UI/FormContainer'
@@ -37,14 +36,11 @@ function UserEditScreen() {
     const userGroupsTemp = [...groupsTempp]
     const groupsTemp = [...groups]
 
-    console.log(groupsTemp)
-    console.log(userGroupsTemp)
     let isEmpty = false;
     if (!userGroupsTemp.length) {
       isEmpty = true
     }
-    // console.log(groups)
-    // debugger
+
     const array = []
     groupsTemp.forEach(group => {
       if (isEmpty && group.group_name !== 'Wszyscy') {
@@ -89,7 +85,6 @@ function UserEditScreen() {
       }
     }
 
-    console.log(array)
     setUserGroups(array)
   }, [JSON.stringify(groups)])
 
@@ -115,9 +110,7 @@ function UserEditScreen() {
         const groupsTempp = user.groups.filter(group => group.group_name !== 'Wszyscy')
         setUserGroups(groupsTempp)
         if (typeof groups !== "undefined") {
-          console.log('elooo')
           if (groups.length) {
-            console.log('elooo222')
             checkUserGroupBelong(groupsTempp)
           }
         }
@@ -150,7 +143,6 @@ function UserEditScreen() {
       <FormContainer>
         <h1>Edycja użytkownika</h1>
         {loadingUpdate && <LoadingSpinner />}
-        {/* {loadingAllGroupList && <LoadingSpinner />} */}
         {errorUpdate && <p>Błąd: {errorUpdate}</p>}
 
         {loading && loadingAllGroupList ? <LoadingSpinner /> : error ? <p>Błąd: {error}</p>
