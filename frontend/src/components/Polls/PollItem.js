@@ -8,7 +8,6 @@ const PollItem = ({ name, description, deadline, id, isFinished, groupName }) =>
   const dispatch = useDispatch();
 
   const downloadReportHandler = () => {
-    console.log('jestem')
     dispatch(downloadReport(name, false));
   }
 

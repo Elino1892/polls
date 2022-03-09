@@ -208,9 +208,7 @@ export const downloadReport = (name, isAdmin) => async (dispatch) => {
       const { data } = await axios(config)
 
       const outputFilename = `Raport_ankieta_${name}.xlsx`;
-      console.log('jestem')
       const url = URL.createObjectURL(new Blob([data]));
-      console.log(url)
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', outputFilename);
