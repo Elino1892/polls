@@ -1,5 +1,5 @@
 import axios from 'axios';
-import URL from '../../constants/URL';
+import url from '../../constants/URL';
 import {
   POLL_LIST_REQUEST,
   POLL_LIST_SUCCESS,
@@ -31,7 +31,7 @@ export const listPolls = () => async (dispatch) => {
   try {
     dispatch({ type: POLL_LIST_REQUEST })
 
-    const { data } = await axios.get(`${URL}/api/polls/all-data`);
+    const { data } = await axios.get(`${url}/api/polls/all-data`);
 
     const polls = [];
 
@@ -68,7 +68,7 @@ export const getPoll = (id) => async (dispatch) => {
 
     dispatch({ type: POLL_REQUEST });
 
-    const { data } = await axios.get(`${URL}/api/polls/${id}`);
+    const { data } = await axios.get(`${url}/api/polls/${id}`);
 
     dispatch({
       type: POLL_SUCCESS,
@@ -129,7 +129,7 @@ export const deletePoll = (id) => async (dispatch, getState) => {
     }
 
     await axios.delete(
-      `${URL}/api/polls/delete/${id}/`,
+      `${url}/api/polls/delete/${id}/`,
       config
     )
 
@@ -169,7 +169,7 @@ export const sentNewPoll = (pollDescription, questionsAndAnswers) => async (disp
     }
 
     await axios.post(
-      `${URL}/api/polls/created-poll`,
+      `${url}/api/polls/created-poll`,
       { newPoll: newPoll },
       config
     )
@@ -189,16 +189,17 @@ export const sentNewPoll = (pollDescription, questionsAndAnswers) => async (disp
 
 
 export const downloadReport = (name, isAdmin) => async (dispatch) => {
+
   try {
     dispatch({ type: DOWNLOAD_REPORT_POLL_REQUEST })
 
     const headers = { 'Content-Type': 'blob' };
     const config = !isAdmin ? {
-      method: 'GET', url: `${URL}/api/polls/report/${name}`
+      method: 'GET', url: `${url}/api/polls/report/${name}`
       , responseType: 'arraybuffer', headers
     } :
       {
-        method: 'GET', url: `${URL}/api/polls/admin/report/${name}`
+        method: 'GET', url: `${url}/api/polls/admin/report/${name}`
         , responseType: 'arraybuffer', headers
       }
       ;
@@ -207,13 +208,15 @@ export const downloadReport = (name, isAdmin) => async (dispatch) => {
       const { data } = await axios(config)
 
       const outputFilename = `Raport_ankieta_${name}.xlsx`;
-
+      console.log('jestem')
       const url = URL.createObjectURL(new Blob([data]));
+      console.log(url)
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', outputFilename);
       document.body.appendChild(link);
       link.click();
+
     } catch (error) {
       throw Error(error);
     }
