@@ -1,4 +1,5 @@
 import axios from "axios";
+import URL from '../../constants/URL';
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -68,7 +69,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      '/api/users/login/',
+      `${URL}/api/users/login/`,
       { 'username': email, 'password': password },
       config
     )
@@ -105,7 +106,7 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      '/api/users/register/',
+      `${URL}/api/users/register/`,
       { 'name': name, 'email': email, 'password': password },
       config
     )
@@ -181,7 +182,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `/api/users/${id}/`,
+      `${URL}/api/users/${id}/`,
       config
     )
 
@@ -220,7 +221,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `/api/users/profile/update/`,
+      `${URL}/api/users/profile/update/`,
       user,
       config
     )
@@ -266,7 +267,7 @@ export const listUsers = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `/api/users/`,
+      `${URL}/api/users/`,
       config
     )
 
@@ -305,7 +306,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.delete(
-      `/api/users/delete/${id}/`,
+      `${URL}/api/users/delete/${id}/`,
       config
     )
 
@@ -344,7 +345,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `/api/users/update/${user.id}/`,
+      `${URL}/api/users/update/${user.id}/`,
       user,
       config
     )

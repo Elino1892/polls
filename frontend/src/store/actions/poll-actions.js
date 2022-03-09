@@ -1,4 +1,5 @@
 import axios from 'axios';
+import URL from '../../constants/URL';
 import {
   POLL_LIST_REQUEST,
   POLL_LIST_SUCCESS,
@@ -30,7 +31,7 @@ export const listPolls = () => async (dispatch) => {
   try {
     dispatch({ type: POLL_LIST_REQUEST })
 
-    const { data } = await axios.get('/api/polls/all-data');
+    const { data } = await axios.get(`${URL}/api/polls/all-data`);
 
     const polls = [];
 
@@ -67,7 +68,7 @@ export const getPoll = (id) => async (dispatch) => {
 
     dispatch({ type: POLL_REQUEST });
 
-    const { data } = await axios.get(`/api/polls/${id}`);
+    const { data } = await axios.get(`${URL}/api/polls/${id}`);
 
     dispatch({
       type: POLL_SUCCESS,
@@ -128,7 +129,7 @@ export const deletePoll = (id) => async (dispatch, getState) => {
     }
 
     await axios.delete(
-      `/api/polls/delete/${id}/`,
+      `${URL}/api/polls/delete/${id}/`,
       config
     )
 
@@ -168,7 +169,7 @@ export const sentNewPoll = (pollDescription, questionsAndAnswers) => async (disp
     }
 
     await axios.post(
-      '/api/polls/created-poll',
+      `${URL}/api/polls/created-poll`,
       { newPoll: newPoll },
       config
     )
@@ -193,11 +194,11 @@ export const downloadReport = (name, isAdmin) => async (dispatch) => {
 
     const headers = { 'Content-Type': 'blob' };
     const config = !isAdmin ? {
-      method: 'GET', url: `/api/polls/report/${name}`
+      method: 'GET', url: `${URL}/api/polls/report/${name}`
       , responseType: 'arraybuffer', headers
     } :
       {
-        method: 'GET', url: `/api/polls/admin/report/${name}`
+        method: 'GET', url: `${URL}/api/polls/admin/report/${name}`
         , responseType: 'arraybuffer', headers
       }
       ;

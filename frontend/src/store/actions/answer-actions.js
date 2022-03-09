@@ -1,4 +1,5 @@
 import axios from 'axios';
+import URL from '../../constants/URL';
 import {
   SENT_ANSWER_FROM_USER_REQUEST,
   SENT_ANSWER_FROM_USER_SUCCESS,
@@ -33,7 +34,7 @@ export const sentAnswersFromUser = (answers, pollId) => async (dispatch, getStat
     }
 
 
-    await axios.put(`/api/polls/${pollId}/finished-poll`,
+    await axios.put(`${URL}/api/polls/${pollId}/finished-poll`,
       answers,
       config
     );
@@ -61,7 +62,7 @@ export const getAnswersByPollId = (pollId) => async (dispatch) => {
 
 
 
-    const { data } = await axios.get(`/api/polls/${pollId}`,);
+    const { data } = await axios.get(`${URL}/api/polls/${pollId}`,);
 
 
 

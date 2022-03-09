@@ -1,4 +1,5 @@
 import axios from 'axios';
+import URL from '../../constants/URL';
 import {
   USER_GROUP_LIST_REQUEST,
   USER_GROUP_LIST_SUCCESS,
@@ -36,7 +37,7 @@ export const listUserGroups = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_GROUP_LIST_REQUEST })
 
-    const { data: userGroups } = await axios.get('/api/user-groups');
+    const { data: userGroups } = await axios.get(`${URL}/api/user-groups`);
 
     const userGroupsID = []
 
@@ -46,7 +47,7 @@ export const listUserGroups = (id) => async (dispatch) => {
       }
     });
 
-    const { data: groups } = await axios.get('/api/groups');
+    const { data: groups } = await axios.get(`${URL}/api/groups`);
 
     const userGroupsName = []
 
@@ -84,7 +85,7 @@ export const getGroupDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_DETAILS_REQUEST })
 
-    const { data } = await axios.get(`/api/groups/${id}/`)
+    const { data } = await axios.get(`${URL}/api/groups/${id}/`)
 
     dispatch({
       type: GROUP_DETAILS_SUCCESS,
@@ -106,7 +107,7 @@ export const allGroups = () => async (dispatch) => {
   try {
     dispatch({ type: GROUP_LIST_REQUEST })
 
-    const { data } = await axios.get('/api/groups');
+    const { data } = await axios.get(`${URL}/api/groups`);
 
 
     dispatch({
@@ -142,8 +143,8 @@ export const deleteGroup = (id) => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.delete(
-      `/api/groups/delete/${id}/`,
+    await axios.delete(
+      `${URL}/api/groups/delete/${id}/`,
       config
     )
 
@@ -185,7 +186,7 @@ export const createGroup = (group) => async (dispatch, getState) => {
 
 
     await axios.post(
-      '/api/groups/create',
+      `/${URL}api/groups/create`,
       group,
       config
     )
@@ -224,7 +225,7 @@ export const updateGroup = (group) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `/api/groups/update/${group.id}/`,
+      `${URL}/api/groups/update/${group.id}/`,
       group,
       config
     )

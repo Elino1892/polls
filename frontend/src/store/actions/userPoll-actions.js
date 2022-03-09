@@ -1,4 +1,5 @@
 import axios from 'axios';
+import URL from '../../constants/URL';
 import {
   USER_POLL_LIST_REQUEST,
   USER_POLL_LIST_SUCCESS,
@@ -10,7 +11,7 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
   try {
     dispatch({ type: USER_POLL_LIST_REQUEST })
 
-    const { data: userPolls } = await axios.get('/api/user-polls');
+    const { data: userPolls } = await axios.get(`${URL}/api/user-polls`);
 
     const userPollsID = []
 
@@ -21,12 +22,12 @@ export const listUserPolls = (id, userGroups) => async (dispatch) => {
     });
 
 
-    const { data: polls } = await axios.get('/api/polls');
+    const { data: polls } = await axios.get(`${URL}/api/polls`);
 
 
     const userAvailablePolls = []
 
-    const { data: pollsGroups } = await axios.get('/api/polls-groups');
+    const { data: pollsGroups } = await axios.get(`${URL}/api/polls-groups`);
 
 
     polls.forEach(poll => {
