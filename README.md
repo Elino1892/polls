@@ -14,6 +14,13 @@
     <a href="https://github.com/Elino1892/polls"><strong>Explore the docs »</strong></a>
     <br />
     <br />
+    <p align="center">Test account - user:</p>
+    <p align="center">Username: test@mail.com</p>
+    <p align="center">Password: test</p>
+    <br />
+    <p align="center">Test account - admin:</p>
+    <p align="center">Username: admin@mail.com</p>
+    <p align="center">Password: admin</p>
     <a href="https://polls-app-project.herokuapp.com/">Live demo</a>
   </p>
 </div>
